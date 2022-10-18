@@ -25,7 +25,11 @@ const anyToSwaggerSchema = (anyValue: any, options?: Options): Schema => {
             if (!ret.properties) {
                 ret.properties = {};
             }
+            if (!ret.required) {
+                ret.required = [];
+            }
             ret.properties[key] = anyToSwaggerSchema(val, options);
+            ret.required.push(key);
         });
     } else if (Array.isArray(anyValue)) {
         if (anyValue.length === 0) {
